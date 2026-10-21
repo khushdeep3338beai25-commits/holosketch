@@ -1,0 +1,21 @@
+{
+  "name": "holosketch-ai",
+  "version": "2.0.0",
+  "description": "HoloSketch AI — Holographic Spatial Canvas with 10-Shape Recognition and Real-Time Gesture Tracking",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "test": "node -e \"import('./shapeRecognizer.js').then(m => { const r = m.evaluateDataset(m.makeSyntheticDataset()); console.log('Accuracy: ' + (r.accuracy*100).toFixed(1) + '% (' + r.correct + '/' + r.total + ' samples)'); })\""
+  },
+  "keywords": [
+    "mediapipe",
+    "hand-tracking",
+    "shape-recognition",
+    "computer-vision",
+    "gesture-drawing",
+    "canvas",
+    "spatial-computing"
+  ]
+}

@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060919">
+  <title>HoloSketch AI — Holographic Gesture Canvas & 10-Shape Recognition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+  <div class="ambient ambient-c"></div>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <a class="brand" href="#">
+      <div class="brand-orb"><span class="brand-mark">✳</span><div class="orb-halo"></div></div>
+      <div class="brand-text">
+        <span>HoloSketch <b class="glow-text">AI</b></span>
+        <small>HOLOGRAPHIC SPATIAL WORKSPACE</small>
+      </div>
+    </a>
+    <div class="top-status">
+      <div class="status-pill">
+        <span class="dot" id="statusDot"></span>
+        <span id="liveStatus">SYSTEM STANDBY</span>
+      </div>
+      <span class="camera-pill" id="cameraStatus">CAMERA OFF</span>
+      <button class="icon-btn" id="soundBtn" title="Toggle audio effects">🔊</button>
+      <button class="icon-btn" id="fullscreenBtn" title="Toggle fullscreen">⤢</button>
+      <button class="icon-btn" id="settingsBtn" title="Settings & tips">⚙</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Landing Screen -->
+    <section id="landing" class="landing">
+      <div class="landing-content">
+        <div class="eyebrow">
+          <span class="pulse"></span> NEXT-GEN SPATIAL COMPUTING · 10+ RECOGNIZED SHAPES
+        </div>
+        <h1>Draw beyond<br><span class="gradient-text">the screen.</span></h1>
+        <p class="hero-copy">
+          Transform your fingertips into an air-drawing precision tool. Sketch freely in mid-air, auto-snap into 10 clean geometric shapes, and manipulate holographic 3D objects with zero touch. Powered by real-time computer vision in your browser.
+        </p>
+
+        <div class="hero-actions">
+          <button class="primary-btn pulse-button" id="launchBtn">
+            <span>Launch HoloSketch</span>
+            <span class="btn-arrow">↗</span>
+          </button>
+          <div class="privacy-badge">
+            <span class="secure-icon">⌁</span>
+            <span>100% On-Device · No Video Uploaded</span>
+          </div>
+        </div>
+
+        <!-- Recognized Shapes Ribbon Showcase -->
+        <div class="shapes-ribbon">
+          <span class="ribbon-title">10 RECOGNIZED SHAPE CLASSES:</span>
+          <div class="ribbon-chips">
+            <span class="r-chip"><i>◯</i> Circle</span>
+            <span class="r-chip"><i>⬭</i> Oval</span>
+            <span class="r-chip"><i>△</i> Triangle</span>
+            <span class="r-chip"><i>□</i> Square</span>
+            <span class="r-chip"><i>▭</i> Rectangle</span>
+            <span class="r-chip"><i>◇</i> Diamond</span>
+            <span class="r-chip"><i>⬠</i> Pentagon</span>
+            <span class="r-chip"><i>⬡</i> Hexagon</span>
+            <span class="r-chip highlight-star"><i>☆</i> Star</span>
+            <span class="r-chip highlight-heart"><i>♡</i> Heart</span>
+          </div>
+        </div>
+
+        <!-- Interactive Quick-Try Pad -->
+        <div class="quick-try-card">
+          <div class="quick-try-head">
+            <div class="q-label">
+              <span class="sparkle">✦</span>
+              <b>INSTANT TRY PAD</b>
+              <small>Draw with mouse or trackpad right now to test the recognition engine</small>
+            </div>
+            <button class="tiny-btn" id="clearQuickBtn">Reset</button>
+          </div>
+          <div class="quick-canvas-wrap">
+            <canvas id="quickCanvas"></canvas>
+            <div class="quick-hint" id="quickHint">
+              <span>✍ Sketch a shape here (e.g. Star, Heart, Diamond, Circle)</span>
+            </div>
+          </div>
+          <div class="quick-result" id="quickResult">Draw any shape in the pad above to test recognition</div>
+        </div>
+
+        <!-- 3 Feature Steps -->
+        <div class="tutorial-strip">
+          <div class="step-card">
+            <span class="step-num">01</span>
+            <div class="step-icon">☝</div>
+            <b>Air Draw</b>
+            <small>Raise only your index finger and move naturally through space</small>
+          </div>
+          <div class="step-card">
+            <span class="step-num">02</span>
+            <div class="step-icon">🪄</div>
+            <b>Auto-Snap</b>
+            <small>Closed strokes instantly snap into perfect geometric shapes</small>
+          </div>
+          <div class="step-card">
+            <span class="step-num">03</span>
+            <div class="step-icon">🤏</div>
+            <b>Grab & Move</b>
+            <small>Pinch thumb and index to pick up, scale, or reposition any shape</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Reticle Orbit -->
+      <div class="hero-orbit" aria-hidden="true">
+        <div class="orbit-glow"></div>
+        <div class="orbit-ring ring-1"></div>
+        <div class="orbit-ring ring-2"></div>
+        <div class="orbit-ring ring-3"></div>
+        <div class="orbit-cross"></div>
+        <div class="orbit-core">✳</div>
+        <span class="orbit-label label-one">21 LANDMARKS</span>
+        <span class="orbit-label label-two">REAL-TIME TRACKING</span>
+        <span class="orbit-label label-three">10 SHAPES AI</span>
+      </div>
+    </section>
+
+    <!-- Workspace Section -->
+    <section id="workspace" class="workspace hidden">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">HOLOGRAPHIC WORKSPACE / LIVE HUD</div>
+          <h2>Interactive <span>Air Canvas.</span></h2>
+        </div>
+        <div class="workspace-actions">
+          <button class="ghost-btn" id="tutorialBtn">⌘ Gesture Guide</button>
+          <button class="danger-btn" id="stopCameraBtn">■ Stop Camera</button>
+        </div>
+      </div>
+
+      <div class="work-grid">
+        <!-- Canvas Panel -->
+        <section class="panel canvas-panel">
+          <div class="panel-head">
+            <div>
+              <span class="panel-kicker">SPATIAL DRAWING SURFACE</span>
+              <h3>Mid-Air Creative Canvas</h3>
+            </div>
+            <div class="panel-head-actions">
+              <span class="live-chip"><i></i> LIVE VISION</span>
+            </div>
+          </div>
+
+          <div class="canvas-wrap" id="canvasWrap">
+            <canvas id="drawCanvas" aria-label="Spatial drawing canvas"></canvas>
+            <div class="canvas-hint" id="canvasHint">
+              <div class="hint-orb">
+                <div class="hint-icon">✳</div>
+              </div>
+              <b>Holographic Canvas Ready</b>
+              <span>Raise your index finger in view of the camera to draw in the air, or click & drag with your mouse.</span>
+            </div>
+            <div class="canvas-coordinates" id="coordinates">X — / Y —</div>
+          </div>
+
+          <!-- Futuristic Toolbar -->
+          <div class="toolbar">
+            <div class="tool-group">
+              <button class="tool-btn active" data-tool="draw" title="Draw in air">
+                <span class="t-icon">✎</span>
+                <small>Draw</small>
+              </button>
+              <button class="tool-btn" data-tool="select" title="Pinch to select and move">
+                <span class="t-icon">⌖</span>
+                <small>Select</small>
+              </button>
+              <button class="tool-btn" data-tool="erase" title="Make a fist to erase">
+                <span class="t-icon">⌫</span>
+                <small>Erase</small>
+              </button>
+              <button class="tool-btn" data-tool="palette" title="Gesture color palette">
+                <span class="t-icon">◉</span>
+                <small>Palette</small>
+              </button>
+              <button class="tool-btn" data-tool="3d" title="3D hologram lab">
+                <span class="t-icon">◇</span>
+                <small>3D Lab</small>
+              </button>
+            </div>
+
+            <div class="tool-divider"></div>
+
+            <!-- Auto-Snap & Grid Toggles -->
+            <div class="toggle-group">
+              <button class="switch-btn active" id="snapToggleBtn" title="Toggle automatic geometric shape snapping">
+                <span class="switch-dot"></span>
+                <small>Snap: ON</small>
+              </button>
+              <button class="switch-btn" id="gridBtn" title="Cycle canvas pattern">
+                <span class="grid-icon">▦</span>
+                <small>Grid: Cyber</small>
+              </button>
+            </div>
+
+            <div class="tool-divider"></div>
+
+            <!-- Color Palette -->
+            <div class="palette" id="palette">
+              <button class="swatch active" data-color="#52f6ff" style="--swatch:#52f6ff" aria-label="Cyan" title="Neon Cyan"></button>
+              <button class="swatch" data-color="#5b8cff" style="--swatch:#5b8cff" aria-label="Blue" title="Plasma Blue"></button>
+              <button class="swatch" data-color="#b58cff" style="--swatch:#b58cff" aria-label="Violet" title="Electric Violet"></button>
+              <button class="swatch" data-color="#ff5edb" style="--swatch:#ff5edb" aria-label="Magenta" title="Laser Magenta"></button>
+              <button class="swatch" data-color="#58f5a8" style="--swatch:#58f5a8" aria-label="Green" title="Matrix Green"></button>
+              <button class="swatch" data-color="#ffcf5a" style="--swatch:#ffcf5a" aria-label="Yellow" title="Solar Yellow"></button>
+              <button class="swatch" data-color="#ff708d" style="--swatch:#ff708d" aria-label="Coral" title="Neon Coral"></button>
+              <button class="swatch" data-color="#ffffff" style="--swatch:#ffffff" aria-label="White" title="Ghost White"></button>
+              <label class="custom-color" title="Custom color picker">
+                ＋<input id="customColor" type="color" value="#52f6ff" aria-label="Custom brush color">
+              </label>
+            </div>
+
+            <div class="tool-divider"></div>
+
+            <!-- Brush Size -->
+            <div class="size-control">
+              <small>SIZE</small>
+              <input id="brushSize" type="range" min="2" max="22" value="6" aria-label="Brush size">
+              <span id="sizeValue">6</span>
+              <div class="size-dot-preview" id="sizeDotPreview"></div>
+            </div>
+
+            <div class="toolbar-end">
+              <button class="small-btn" id="undoBtn" title="Undo (↶ / Swipe left)">↶</button>
+              <button class="small-btn" id="redoBtn" title="Redo (↷ / Swipe right)">↷</button>
+              <button class="small-btn" id="clearBtn" title="Clear canvas">⌧</button>
+              <button class="small-btn highlight-btn" id="saveBtn" title="Download PNG">↓</button>
+            </div>
+          </div>
+
+          <!-- Shape Library Bar (10 Shapes) -->
+          <div class="shape-library-bar">
+            <span class="lib-label">SHAPE LIBRARY (CLICK TO STAMP):</span>
+            <div class="shape-chips-scroll">
+              <button type="button" class="shape-lib-chip" data-shape="Circle"><i>◯</i> Circle</button>
+              <button type="button" class="shape-lib-chip" data-shape="Oval"><i>⬭</i> Oval</button>
+              <button type="button" class="shape-lib-chip" data-shape="Triangle"><i>△</i> Triangle</button>
+              <button type="button" class="shape-lib-chip" data-shape="Square"><i>□</i> Square</button>
+              <button type="button" class="shape-lib-chip" data-shape="Rectangle"><i>▭</i> Rectangle</button>
+              <button type="button" class="shape-lib-chip" data-shape="Diamond"><i>◇</i> Diamond</button>
+              <button type="button" class="shape-lib-chip" data-shape="Pentagon"><i>⬠</i> Pentagon</button>
+              <button type="button" class="shape-lib-chip" data-shape="Hexagon"><i>⬡</i> Hexagon</button>
+              <button type="button" class="shape-lib-chip chip-star" data-shape="Star"><i>☆</i> Star</button>
+              <button type="button" class="shape-lib-chip chip-heart" data-shape="Heart"><i>♡</i> Heart</button>
+            </div>
+          </div>
+
+          <div class="canvas-footer">
+            <span id="activeGesture">GESTURE · WAITING FOR HAND</span>
+            <span id="objectCount">0 OBJECTS</span>
+          </div>
+
+          <div class="selection-help" id="selectionHelp" aria-live="polite"></div>
+
+          <!-- 3D Controls -->
+          <div class="feature-controls" id="threeDControls">
+            <span class="feature-label">3D OBJECT LAB</span>
+            <button class="ghost-btn" data-3d="cube">＋ Cube</button>
+            <button class="ghost-btn" data-3d="sphere">＋ Sphere</button>
+            <button class="ghost-btn" data-3d="pyramid">＋ Pyramid</button>
+            <button class="ghost-btn" data-3d="octahedron">＋ Octahedron</button>
+            <button class="ghost-btn" data-3d="cylinder">＋ Cylinder</button>
+            <button class="small-btn" id="rotate3dBtn" title="Rotate selected 3D object">⟳</button>
+            <button class="small-btn" id="scale3dBtn" title="Scale selected 3D object">⤢</button>
+            <span class="feature-note">Pinch = move · two fingers = rotate · open palm = scale</span>
+          </div>
+        </section>
+
+        <!-- Right Side Stack -->
+        <aside class="side-stack">
+          <!-- Camera Feed Panel -->
+          <section class="panel camera-panel">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">VISION SENSOR HUD</span>
+                <h3>Hand Tracking</h3>
+              </div>
+              <span class="tiny-status" id="trackingLabel">OFFLINE</span>
+            </div>
+
+            <div class="camera-view">
+              <video id="cameraVideo" autoplay playsinline muted></video>
+              <canvas id="landmarkCanvas"></canvas>
+              <div class="camera-overlay" id="cameraOverlay">
+                <div class="reticle-pulse"><span>◉</span></div>
+                <b>Camera Standby</b>
+                <small>Launch workspace to begin real-time tracking</small>
+              </div>
+              <div class="cam-corner tl">⌜</div>
+              <div class="cam-corner tr">⌝</div>
+              <div class="cam-corner bl">⌞</div>
+              <div class="cam-corner br">⌟</div>
+              <div class="cam-hud-tag">AI-VISION / CH-01</div>
+            </div>
+
+            <div class="camera-stats">
+              <div class="c-stat">
+                <small>CONFIDENCE</small>
+                <b id="confidenceValue">—</b>
+              </div>
+              <div class="c-stat">
+                <small>FRAME RATE</small>
+                <b id="fpsValue">0</b>
+              </div>
+              <div class="c-stat">
+                <small>LATENCY</small>
+                <b id="latencyValue">—</b>
+              </div>
+            </div>
+
+            <div class="tracking-note" id="trackingNote">
+              Camera permission is requested locally. No imagery is ever stored or transmitted.
+            </div>
+          </section>
+
+          <!-- Shape Recognition Card -->
+          <section class="panel recognition-panel">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">10-SHAPE GEOMETRY ENGINE</span>
+                <h3>Shape Recognition</h3>
+              </div>
+              <span class="sparkle">✧</span>
+            </div>
+
+            <div class="recognition-result">
+              <div class="shape-icon-wrap">
+                <div class="shape-icon" id="shapeIcon">◇</div>
+                <div class="shape-icon-glow"></div>
+              </div>
+              <div class="recog-info">
+                <small>PREDICTED GEOMETRY</small>
+                <b id="shapeName">Waiting for sketch…</b>
+                <span id="shapeScore">Draw a closed shape in the air to classify</span>
+              </div>
+            </div>
+
+            <div class="history-head">
+              <span>RECENTLY RECOGNIZED</span>
+              <button id="clearHistoryBtn">Clear</button>
+            </div>
+
+            <div class="shape-history" id="shapeHistory">
+              <span class="empty-history">Your recognized shapes will appear here.</span>
+            </div>
+          </section>
+        </aside>
+      </div>
+
+      <!-- AI Prompt Assistant -->
+      <section class="panel assistant-panel">
+        <div class="panel-head">
+          <div>
+            <span class="panel-kicker">NEURAL PROMPT GENERATOR</span>
+            <h3>AI Drawing Assistant</h3>
+          </div>
+          <span class="assistant-badge">✦ PROMPT TO COMPOSITION</span>
+        </div>
+        <div class="assistant-body">
+          <div class="assistant-copy">
+            <b>Generate editable holographic compositions instantly.</b>
+            <span>Type any concept below or pick a preset to assemble multi-part geometric artwork right on your canvas.</span>
+          </div>
+
+          <form id="assistantForm" class="assistant-form">
+            <div class="input-glow-wrap">
+              <input id="assistantPrompt" type="text" maxlength="180" placeholder="e.g. create a galaxy with stars, or royal crown with gems" aria-label="Describe a drawing"/>
+            </div>
+            <button class="primary-btn" type="submit">Generate Composition ↗</button>
+          </form>
+
+          <div class="prompt-chips">
+            <button type="button" data-prompt="create a galaxy with stars">🌌 Galaxy & Stars</button>
+            <button type="button" data-prompt="royal crown with gems">👑 Gem Crown</button>
+            <button type="button" data-prompt="valentine love heart with sparkles">💖 Valentine Heart</button>
+            <button type="button" data-prompt="holographic castle fortress">🏰 Cyber Castle</button>
+            <button type="button" data-prompt="draw a rocket in space">🚀 Space Rocket</button>
+            <button type="button" data-prompt="cybernetic robot chassis">🤖 Cyber Robot</button>
+            <button type="button" data-prompt="create a house using basic shapes">🏠 Neon House</button>
+            <button type="button" data-prompt="make a flower with petals">🌸 Hologram Flower</button>
+          </div>
+
+          <div class="assistant-response" id="assistantResponse" aria-live="polite">
+            Select a preset above or type a description. All generated objects remain fully movable and editable on your canvas.
+          </div>
+        </div>
+      </section>
+
+      <!-- Lower Controls Grid -->
+      <div class="lower-grid">
+        <!-- Gesture Reference -->
+        <section class="panel gesture-panel">
+          <div class="panel-head">
+            <div>
+              <span class="panel-kicker">GESTURE MAPPING</span>
+              <h3>Quick Air Gestures</h3>
+            </div>
+            <button class="text-btn" id="openGuide">Full Guide ↗</button>
+          </div>
+
+          <div class="gesture-list">
+            <div class="gesture-row">
+              <span class="gesture-symbol">☝</span>
+              <span><b>Index Finger Up</b><small>Draw freehand strokes or outline shapes</small></span>
+              <kbd>DRAW</kbd>
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-symbol">🤏</span>
+              <span><b>Pinch Thumb + Index</b><small>Grab, reposition, and drag digital objects</small></span>
+              <kbd>GRAB</kbd>
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-symbol">✋</span>
+              <span><b>Open Palm</b><small>Pause drawing / Swipe left or right to undo/redo</small></span>
+              <kbd>PAUSE</kbd>
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-symbol">✌</span>
+              <span><b>Two Fingers Up</b><small>Enter select mode / Rotate 3D objects</small></span>
+              <kbd>SELECT</kbd>
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-symbol">✊</span>
+              <span><b>Closed Fist</b><small>Erase hovered shape or last air stroke</small></span>
+              <kbd>ERASE</kbd>
+            </div>
+          </div>
+        </section>
+
+        <!-- Runtime Telemetry -->
+        <section class="panel performance-panel">
+          <div class="panel-head">
+            <div>
+              <span class="panel-kicker">REAL-TIME DIAGNOSTICS</span>
+              <h3>Performance Telemetry</h3>
+            </div>
+            <span class="telemetry-icon">⌁</span>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric-card">
+              <small>FRAME RATE</small>
+              <b><span id="dashFps">0</span><em>FPS</em></b>
+              <div class="metric-track"><i id="fpsBar"></i></div>
+            </div>
+            <div class="metric-card">
+              <small>INFERENCE LATENCY</small>
+              <b><span id="dashLatency">—</span><em>MS</em></b>
+              <div class="metric-track"><i id="latencyBar"></i></div>
+            </div>
+            <div class="metric-card">
+              <small>GESTURES DETECTED</small>
+              <b id="gestureCount">0</b>
+              <span class="metric-sub">Session interactions</span>
+            </div>
+            <div class="metric-card">
+              <small>STROKES DRAWN</small>
+              <b id="drawingCount">0</b>
+              <span class="metric-sub">Completed paths</span>
+            </div>
+          </div>
+
+          <button class="wide-ghost-btn" id="evaluationBtn">
+            <span>Open 10-Shape AI Evaluation Dashboard</span>
+            <span>↗</span>
+          </button>
+        </section>
+      </div>
+
+      <!-- Evaluation Lab Panel (10 Classes) -->
+      <section class="panel evaluation-panel hidden" id="evaluationPanel">
+        <div class="panel-head">
+          <div>
+            <span class="panel-kicker">SCIENTIFIC BENCHMARK LAB</span>
+            <h3>10-Shape Recognition AI Evaluation</h3>
+            <p class="muted">
+              Benchmark computed across 100 deterministic test samples (10 samples per shape: easy, noisy, and rotated variations).
+            </p>
+          </div>
+          <div class="evaluation-actions">
+            <button class="ghost-btn" id="exportJsonBtn">Export JSON</button>
+            <button class="ghost-btn" id="exportCsvBtn">Export CSV</button>
+            <button class="small-btn" id="resetEvalBtn" title="Reset live session telemetry">↻</button>
+          </div>
+        </div>
+
+        <div class="eval-summary" id="evalSummary"></div>
+
+        <div class="eval-grid">
+          <div class="eval-card">
+            <h4>10×10 Confusion Matrix</h4>
+            <div id="confusionMatrix"></div>
+          </div>
+          <div class="eval-card">
+            <h4>Per-Class Precision, Recall & F1</h4>
+            <div id="classMetrics"></div>
+          </div>
+        </div>
+
+        <div class="eval-bottom">
+          <div>
+            <b>Trajectory Jitter Stabilization</b>
+            <p class="muted">Raw optical fingertip jitter vs Exponential Moving Average smoothing measured from live session data.</p>
+            <div class="stability-bars">
+              <span>RAW JITTER: <b id="rawJitter">—</b></span>
+              <div class="metric-track"><i id="rawJitterBar"></i></div>
+              <span>SMOOTHED JITTER: <b id="smoothJitter">—</b></span>
+              <div class="metric-track"><i id="smoothJitterBar"></i></div>
+            </div>
+          </div>
+          <div>
+            <b>Dataset Composition (100 Total Samples)</b>
+            <p class="muted">Balanced coverage across all 10 geometric shape categories.</p>
+            <div class="dataset-chips">
+              <span>10 CIRCLE</span>
+              <span>10 OVAL</span>
+              <span>10 TRIANGLE</span>
+              <span>10 SQUARE</span>
+              <span>10 RECTANGLE</span>
+              <span>10 DIAMOND</span>
+              <span>10 PENTAGON</span>
+              <span>10 HEXAGON</span>
+              <span>10 STAR</span>
+              <span>10 HEART</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="workspace-footer">
+        <span>HOLOSKETCH AI <i>·</i> LOCAL BROWSER COMPUTER VISION</span>
+        <span>TOUCHLESS SPATIAL CREATIVITY <i>·</i> 100% PRIVATE</span>
+      </footer>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- Interactive Gesture Guide Dialog -->
+  <dialog id="guideDialog">
+    <div class="dialog-head">
+      <div>
+        <span class="panel-kicker">SPATIAL CONTROLS</span>
+        <h3>HoloSketch AI Guide</h3>
+      </div>
+      <button class="small-btn" id="closeGuide">✕</button>
+    </div>
+    <div class="guide-content">
+      <h4>How to Draw & Recognize Shapes</h4>
+      <p><b>1. Hand Position:</b> Keep one hand visible inside the camera frame, palm facing the camera.</p>
+      <p><b>2. Drawing:</b> Raise only your index finger. Fold all other fingers. Move your fingertip through the air.</p>
+      <p><b>3. Supported 10 Shapes:</b> Draw any closed outline — <b>Circle</b>, <b>Oval</b>, <b>Triangle</b>, <b>Square</b>, <b>Rectangle</b>, <b>Diamond</b>, <b>Pentagon</b>, <b>Hexagon</b>, <b>Star</b>, or <b>Heart</b>. Close the shape to trigger auto-snap!</p>
+      <p><b>4. Moving Objects:</b> Switch to Select mode (or pinch directly over an object) to pick it up and move it.</p>
+      <p><b>5. 3D Lab:</b> Use the 3D button in the toolbar to spawn interactive 3D holograms (Cube, Sphere, Pyramid, Octahedron Diamond, Cylinder).</p>
+      <p class="muted">MediaPipe vision models run completely inside your local browser GPU/WASM with zero server latency or data collection.</p>
+    </div>
+    <button class="primary-btn" id="guideGotIt">Understood <span>✓</span></button>
+  </dialog>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
