@@ -16,20 +16,6 @@ HoloSketch AI combines computer vision, gesture recognition, geometric analysis,
 
 The application features a futuristic cyberpunk interface with neon holographic elements, glassmorphism panels, ambient lighting, and interactive 2D and 3D workspaces.
 
-### ✨ Core Highlights
-
-- Real-time hand tracking using MediaPipe.
-- Touchless air drawing and gesture-based interactions.
-- Recognition of 10 geometric shape categories.
-- Automatic geometric shape snapping.
-- Interactive 3D holographic object manipulation.
-- AI-inspired multi-part composition generation.
-- Interactive shape library with direct canvas stamping.
-- Multiple canvas grid modes.
-- Native Web Audio API sound effects.
-- 10×10 shape recognition evaluation dashboard.
-- Local browser-based video processing.
-
 ---
 
 ## 🚀 What's New in This Edition
