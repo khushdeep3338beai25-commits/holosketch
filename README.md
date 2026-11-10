@@ -8,3 +8,10 @@ HoloSketch AI transforms natural hand movements into digital creativity. Using G
 No physical drawing tablet. No touch required. Just your hands and imagination.
 
 ---
+
+## 🌌 Project Overview
+
+HoloSketch AI combines computer vision, gesture recognition, geometric analysis, and interactive canvas rendering to create an immersive spatial creative environment.
+
+The application features a futuristic cyberpunk interface with neon holographic elements, glassmorphism panels, ambient lighting, and interactive 2D and 3D workspaces.
+
