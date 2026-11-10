@@ -4,29 +4,7 @@ HoloSketch AI is a browser-based touchless creative workstation that turns your 
 
 ---
 
-## ✨ What's New in this Upgraded Edition
 
-## 🚀 How to Run Locally
-
-Camera access requires **localhost or HTTPS** in modern browsers:
-
-1. Extract the project ZIP.
-2. Open a terminal in the project directory.
-3. Start a local server:
-   - Python:
-     ```bash
-     python3 -m http.server 8000
-     ```
-   - Node:
-     ```bash
-     npx serve .
-     ```
-4. Open `http://localhost:8000` in Google Chrome, Microsoft Edge, or any modern Chromium browser.
-5. Click **Launch HoloSketch**, grant webcam permissions, and wait 2–3 seconds for the MediaPipe hand model to load.
-
-*Note: The first launch downloads the MediaPipe model files from Google's public CDN.*
-
----
 
 ## ✋ Air Gesture Controls
 
