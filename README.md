@@ -65,23 +65,7 @@ Camera access requires **localhost or HTTPS** in modern browsers:
 | **SELECT** | ✌ Two fingers raised | Switch to select mode / Rotate 3D objects sideways |
 | **ERASE** | ✊ Closed fist | Erase selected object or latest stroke |
 | **SCALE** | ✋ Open palm (in 3D mode) | Expand or contract hand to scale selected 3D object |
-| **COLOR** | ◉ Palette mode | Move index finger horizontally to preview vibrant colors |
-
----
-
-## 📁 Project Architecture
-
-- `index.html` — Upgraded spatial interface, quick-try pad, 10-shape ribbon, and holographic panels.
-- `style.css` — Modern cyberpunk glassmorphism theme, glowing neon accents, and responsive layout.
-- `main.js` — Camera stream, MediaPipe inference loop, gesture state machine, audio synthesizer, and event orchestration.
-- `shapeRecognizer.js` — Rotation-invariant minimum bounding box, convexity analysis, 10-shape classifier, and 100-sample test benchmark.
-- `drawingEngine.js` — Neon glowing canvas strokes, particle spark trails, and multiple cyber grid styles.
-- `objectManager.js` — Storage, hit-testing, selection bounding boxes, and rendering for all 10 2D shapes & 5 3D models.
-- `evaluation.js` — 10×10 confusion matrix heatmap, per-class metrics table, and CSV/JSON export.
-- `smoothing.js` — Exponential moving average smoothing and jitter diagnostics.
-- `handTracker.js` & `gestureRecognizer.js` — Module boundaries for camera and gesture subsystems.
-
----
+| **COLOR** | ◉ Palette mode | Move index finger horizontally to preview vibrant 
 
 ## 🔒 Privacy
 
