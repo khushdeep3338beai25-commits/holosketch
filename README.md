@@ -1,3 +1,4 @@
+
 # ✨ HoloSketch AI — Next-Gen Spatial Canvas & 10-Shape Recognition
 
 > **Turn your fingertips into a creative instrument.**  
@@ -177,3 +178,200 @@ The evaluation module provides a structured overview of shape classification per
 The evaluation dashboard helps identify classification errors and analyze recognition performance across all supported shape categories.
 
 ---
+
+## ✋ Air Gesture Controls
+
+HoloSketch AI uses intuitive hand gestures to control the creative workspace.
+
+| Gesture | Hand Pose | Action |
+|---|---|---|
+| DRAW | ☝ Index finger raised | Draw and outline shapes in the air |
+| GRAB | 🤏 Thumb and index pinch | Select, grab, and move objects |
+| PAUSE | ✋ Open palm | Pause drawing |
+| UNDO / REDO | ✋ Horizontal palm swipe | Navigate drawing history |
+| SELECT | ✌ Two fingers raised | Activate selection mode |
+| ROTATE | ✌ Two-finger movement | Rotate 3D objects |
+| ERASE | ✊ Closed fist | Erase selected object or latest stroke |
+| SCALE | ✋ Open palm in 3D mode | Scale selected 3D object |
+| COLOR | ◉ Palette mode | Preview and select vibrant colors |
+
+*Gesture recognition depends on camera positioning, lighting, hand visibility, and tracking stability.*
+
+---
+
+## 🛠️ Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Application structure |
+| CSS3 | Styling, animations, and glassmorphism |
+| JavaScript ES6+ | Application logic |
+| MediaPipe Hand Landmarker | Real-time hand tracking |
+| Canvas API | 2D drawing and rendering |
+| Web Audio API | Procedural sound synthesis |
+| WebGL / GPU | Accelerated visual processing |
+| Computer Vision | Shape and gesture recognition |
+
+---
+
+## 📁 Project Architecture
+
+```text
+HoloSketch-AI/
+│
+├── index.html
+├── style.css
+│
+├── main.js
+├── shapeRecognizer.js
+├── drawingEngine.js
+├── objectManager.js
+├── evaluation.js
+├── smoothing.js
+│
+├── handTracker.js
+├── gestureRecognizer.js
+│
+├── assets/
+│
+└── README.md
+```
+
+### Core Modules
+
+| File | Responsibility |
+|---|---|
+| `index.html` | Main spatial interface, landing page, and workspace |
+| `style.css` | Cyberpunk theme, animations, responsive styling |
+| `main.js` | Main application orchestration and event handling |
+| `shapeRecognizer.js` | 10-shape classification and geometric analysis |
+| `drawingEngine.js` | Canvas rendering, neon strokes, and grid modes |
+| `objectManager.js` | Object storage, selection, hit-testing, and rendering |
+| `evaluation.js` | Confusion matrix, metrics, and data exports |
+| `smoothing.js` | Trajectory smoothing and jitter diagnostics |
+| `handTracker.js` | Camera stream and MediaPipe tracking |
+| `gestureRecognizer.js` | Hand gesture classification and interaction states |
+
+---
+
+## ⚙️ Installation & Local Setup
+
+Camera access requires a secure browser context such as `localhost` or HTTPS.
+
+### Step 1 — Download the Project
+
+Download or clone the project repository.
+
+```bash
+git clone <YOUR_REPOSITORY_URL>
+```
+
+### Step 2 — Open the Project Directory
+
+```bash
+cd HoloSketch-AI
+```
+
+### Step 3 — Start a Local Development Server
+
+**Option A: Python**
+
+```bash
+python3 -m http.server 8000
+```
+
+**Option B: Node.js**
+
+```bash
+npx serve .
+```
+
+### Step 4 — Open in Your Browser
+
+Navigate to:
+
+```text
+http://localhost:8000
+```
+
+Recommended browsers:
+- Google Chrome
+- Microsoft Edge
+- Modern Chromium-based browsers
+
+### Step 5 — Launch HoloSketch AI
+
+1. Open the application.
+2. Click **Launch HoloSketch**.
+3. Allow webcam permissions.
+4. Wait for the MediaPipe hand-tracking model to load.
+5. Position your hand in front of the camera.
+6. Start drawing and interacting using gestures.
+
+**Note:** The first launch may require downloading MediaPipe model assets from Google's public CDN. An internet connection may be required unless the dependencies and model files are hosted locally.
+
+---
+
+## 🔒 Privacy & Security
+
+HoloSketch AI is designed around local browser-based processing.
+
+- Webcam video is processed locally in the browser.
+- Hand tracking uses MediaPipe and browser-based inference.
+- Sketches are rendered within the application.
+- No webcam imagery is intentionally uploaded to a project backend.
+- No remote storage of sketches is required by the described architecture.
+
+**Privacy note:** Third-party CDN requests may occur when loading external libraries or model assets. Review dependencies and network requests to verify the application's complete privacy behavior.
+
+---
+
+## 🎯 Project Goals
+
+HoloSketch AI explores how computer vision and spatial interaction can transform traditional digital creativity.
+
+Its primary goals are:
+
+1. Make digital drawing accessible without physical input devices.
+2. Explore real-time hand gesture recognition.
+3. Improve geometric sketch recognition.
+4. Enable intuitive 3D object manipulation.
+5. Combine AI-inspired composition with interactive drawing.
+6. Create an immersive and futuristic creative environment.
+
+---
+
+## 🔮 Future Enhancements
+
+Potential future improvements include:
+
+- Advanced gesture customization.
+- More geometric shape categories.
+- Persistent cloud-based project storage.
+- Export drawings as SVG and PNG.
+- 3D model export functionality.
+- Custom hand gesture training.
+- Multi-hand collaboration.
+- Voice-controlled creative commands.
+- AI-powered freehand sketch enhancement.
+- Advanced spatial object placement.
+
+---
+
+## 👨‍💻 Author & Project
+
+**Project:** HoloSketch AI  
+**Category:** AI / Computer Vision / Spatial Computing  
+**Platform:** Web Browser  
+**Interaction:** Touchless Hand Gesture Control  
+**Core Recognition:** 10 Geometric Shapes
+
+---
+
+<p align="center">
+
+### ✨ Draw Beyond the Screen.
+
+**HoloSketch AI — Where Your Hands Become the Interface.**
+
+</p>
